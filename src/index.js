@@ -8,6 +8,8 @@ const express = require('express');
 const app = express();
 const port = process.env.PORT;
 
+// this is a middlewares....
+
 // app.use((req,res)=>{
 //     res.status(503).send("site is currently down. Check back soon")
 // })
@@ -16,19 +18,24 @@ app.use(express.json())
 app.use(userRouter);
 app.use(taskRouter);
 
-const multer = require('multer');
-const upload = multer({
-    dest:'images',
-    limits:{
-        fileSize:1000000
-    },
-    fileFilter(req,file,cb){
-        if(!file.originalname.match(/\.(doc|docx|pdf)$/)){
-           return cb( new Error('please upload doc,docx or pdf file'))
-        }
-        cd(undefined,true);
-    }
-})
+//How to use multer 
+
+
+// const multer = require('multer');
+// const upload = multer({
+//     dest:'images',
+//     limits:{
+//         fileSize:1000000
+//     },
+//     fileFilter(req,file,cb){
+//         if(!file.originalname.match(/\.(doc|docx|pdf)$/)){
+//            return cb( new Error('please upload doc,docx or pdf file'))
+//         }
+//         cd(undefined,true);
+//     }
+// })
+
+
 app.use('/upload',upload.single('upload'),(req,res)=>{
     res.send();
 },(error,req,res,next)=>{
@@ -43,7 +50,7 @@ app.listen(port, () => {
 
 
 
-
+// how to connect to documents.....
 
 
 // const Task = require('./models/task');
